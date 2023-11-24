@@ -30,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -45,6 +45,29 @@
             <a class="nav-link" href="{{ route('home') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>{{ __('Dashboard') }}</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            {{ __('Modules') }}
+        </div>
+
+        <!-- Nav Item - User -->
+        <li class="nav-item {{ Nav::isRoute('user.index') }}">
+            <a class="nav-link" href="{{ route('user.index') }}">
+                <i class="fas fa-user"></i>
+                <span>{{ __('User') }}</span>
+            </a>
+        </li>
+        <!-- Nav Item - Barang -->
+        <li class="nav-item {{ Nav::isRoute('barang.index') }}">
+            <a class="nav-link" href="{{ route('barang.index') }}">
+                <i class="fas fa-box"></i>
+                <span>{{ __('Barang') }}</span>
+            </a>
         </li>
 
         <!-- Divider -->

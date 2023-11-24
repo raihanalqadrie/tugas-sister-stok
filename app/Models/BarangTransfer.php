@@ -16,7 +16,7 @@ class BarangTransfer extends Model
      * @var array
      */
     protected $fillable = [
-        'barnag_id', "jumlah", 'deskripsi', "penerima"
+        'barang_id', "jumlah", 'deskripsi', "penerima"
     ];
 
 
