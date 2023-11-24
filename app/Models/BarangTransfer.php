@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Notifications\Notifiable;
 
 class BarangTransfer extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -17,12 +16,22 @@ class BarangTransfer extends Model
      * @var array
      */
     protected $fillable = [
-        'barang_id', 'deskripsi', "jumlah", "harga_satuan", "penerima"
+        'barang_id', 'deskripsi', 'tipe', "jumlah", "harga_satuan", "penerima"
     ];
 
+    /**
+     * We want to enforce the property type
+     * might be useful to solve a common bug when the
+     * database doesn't return the right type.
+     */
+    protected $casts = [
+        'barang_id' => 'float',
+        'jumlah' => 'float',
+        'harga_satuan' => 'float',
+    ];
 
     public function barang(): BelongsTo
     {
-        return $this->belongsTo(BarangTransfer::class, 'id', 'barang_id');
+        return $this->belongsTo(Barang::class, 'barang_id', 'id');
     }
 }

@@ -34,8 +34,14 @@ Route::get('/about', function () {
 
 Route::middleware('auth')->group(function() {
     Route::resource('user', UserController::class);
-    Route::get('/barang-transfer/masuk', [BarangTransferController::class, 'barangsMasuk'])->name('barang-transfer.masuk');
-    Route::get('/barang-transfer/keluar', [BarangTransferController::class, 'barangsKeluar'])->name('barang-transfer.keluar');
-    Route::resource('barang-transfer', BarangTransferController::class)->names('barang-transfer');
+
     Route::resource('barang', BarangController::class)->names('barang');
+
+    Route::get('/barang-transfer/masuk', [BarangTransferController::class, 'barangsMasuk'])->name('barang-transfer.index.masuk');
+    Route::get('/barang-transfer/keluar', [BarangTransferController::class, 'barangsKeluar'])->name('barang-transfer.index.keluar');
+    Route::resource('barang-transfer', BarangTransferController::class)->names('barang-transfer');
+});
+
+Route::fallback(function () {
+    return redirect()->route('home');
 });

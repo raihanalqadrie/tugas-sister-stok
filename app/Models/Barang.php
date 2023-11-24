@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Notifications\Notifiable;
 
 class Barang extends Model
 {
-    use HasFactory, Notifiable;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -29,12 +28,12 @@ class Barang extends Model
     public function getStockAttribute()
     {
         $barang = $this->find($this->id);
-        $quantities = $barang
+        $jumlahTotal = $barang
             ->transfers()
             ->get()
-            ->map( fn( $transfer ) => $transfer->qty )
+            ->map(fn ($transfer) => $transfer->tipe === 'masuk' ? $transfer->jumlah : -$transfer->jumlah)
             ->toArray();
-        return collect($quantities)->sum();
+        return collect($jumlahTotal)->sum();
     }
 
     public function transfers(): HasMany

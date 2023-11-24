@@ -15,10 +15,21 @@
                     <label for="barang_id">Nama Barang</label>
                     <select name="barang_id" id="barang_id" class="form-control @error('barang_id') is-invalid @enderror">
                         @foreach ($barangs as $barang)
-                            <option value="{{ $barang->id }}">(id = {{ $barang->id }}) - {{ $barang->nama }}</option>
+                            <option value="{{ $barang->id }}" {{ $barangs[0]->id === $barang->id ? 'selected' : '' }}>(id = {{ $barang->id }}) - {{ $barang->nama }}</option>
                         @endforeach
                     </select>
                     @error('barang_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="tipe">Tipe</label>
+                    <select name="tipe" id="tipe" class="form-control @error('tipe') is-invalid @enderror">
+                        <option value="masuk">masuk</option>
+                        <option value="keluar">keluar</option>
+                    </select>
+                    @error('tipe')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
                 </div>
@@ -61,7 +72,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="{{ route('barang-transfer.masuk') }}" class="btn btn-default">Back to list</a>
+                <a href="{{ route('barang-transfer.index') }}" class="btn btn-default">Back to list</a>
 
             </form>
         </div>

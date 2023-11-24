@@ -7,6 +7,8 @@
     <!-- Main Content goes here -->
 
     <a href="{{ route('barang-transfer.create') }}" class="btn btn-primary mb-3">Create Transfer Barang</a>
+    <a href="{{ route('barang-transfer.index.masuk') }}" class="btn btn-primary mb-3">List Barang Masuk</a>
+    <a href="{{ route('barang-transfer.index.keluar') }}" class="btn btn-secondary mb-3">List Barang Keluar</a>
 
     @if (session('message'))
         <div class="alert alert-success">
@@ -31,11 +33,11 @@
             @foreach ($barangTransfers as $transfer)
                 <tr>
                     <td scope="row">{{ $loop->iteration }}</td>
-                    <td>{{ $transfer->barang->nama }}</td>
+                    <td>{{ $transfer->barang ? $transfer->barang->nama : 'ERROR' }}</td>
                     <td>{{ $transfer->deskripsi }}</td>
                     <td>{{ $transfer->jumlah }}</td>
-                    <td>{{ $transfer->harga_satuan }}</td>
-                    <td>{{ $transfer->jumlah * $transfer->harga_satuan }}</td>
+                    <td>{{ Number::currency($transfer->harga_satuan, in: 'IDR', locale: 'id') }}</td>
+                    <td>{{ Number::currency($transfer->jumlah * $transfer->harga_satuan, in: 'IDR', locale: 'id') }}</td>
                     <td>{{ $transfer->created_at }}</td>
                     <td>
                         <div class="d-flex">

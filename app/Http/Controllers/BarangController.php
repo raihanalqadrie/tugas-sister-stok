@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddBarangRequest;
 use App\Http\Requests\EditBarangRequest;
 use App\Models\Barang;
-use Illuminate\Support\Facades\DB;
 
 class BarangController extends Controller
 {
@@ -51,11 +50,11 @@ class BarangController extends Controller
      */
     public function store(AddBarangRequest $request)
     {
-        Barang::create([
+        $barang = Barang::create([
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
         ]);
-        return redirect('/barang/{id}')->with('success', true);
+        return redirect()->route('barang.edit', [$barang->id])->with('success', 'Barang berhasil di create');
     }
 
     /**
@@ -88,9 +87,7 @@ class BarangController extends Controller
         $barang->nama = $request->nama;
         $barang->deskripsi = $request->deskripsi;
         $barang->save();
-        return redirect('/barang/{id}', [
-            "barang" => $barang,
-        ]);
+        return redirect()->route('barang.edit', [$barang->id])->with('success', 'Barang berhasil di update');
     }
 
     /**
@@ -99,6 +96,6 @@ class BarangController extends Controller
     public function destroy(Barang $barang)
     {
         $barang->delete();
-        return redirect()->route('barang.index')->with('message', 'Barang deleted successfully!');
+        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus');
     }
 }

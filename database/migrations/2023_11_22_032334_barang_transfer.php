@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('barang_transfers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('barang_id');
-            $table->foreign('barang_id')->references('id')->on('barangs');
+            $table->foreign('barang_id')
+                ->references('id')
+                ->on('barangs')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->string('deskripsi');
+            $table->string('tipe'); // masuk, keluar
             $table->integer("jumlah");
             $table->integer("harga_satuan");
             $table->string('penerima');

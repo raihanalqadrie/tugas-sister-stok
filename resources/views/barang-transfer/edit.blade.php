@@ -25,6 +25,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="tipe">Tipe</label>
+                    <select name="tipe" id="tipe" class="form-control @error('tipe') is-invalid @enderror">
+                        <option value="masuk">masuk</option>
+                        <option value="keluar">keluar</option>
+                    </select>
+                    @error('tipe')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="deskripsi">Deskripsi</label>
                     <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
                         id="deskripsi" placeholder="Deskripsi" autocomplete="off" value="{{ old('deskripsi') ?? $barangTransfer->deskripsi }}">
@@ -75,7 +86,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="{{ $barangTransfer->jumlah > 0 ? route('barang-transfer.masuk') : route('barang-transfer.keluar') }}" class="btn btn-default">Back to list</a>
+                <a href="{{ $barangTransfer->jumlah > 0 ? route('barang-transfer.index.masuk') : route('barang-transfer.index.keluar') }}" class="btn btn-default">Back to list</a>
 
             </form>
         </div>

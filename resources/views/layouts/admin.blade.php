@@ -70,16 +70,10 @@
             </a>
         </li>
         <!-- Nav Item - Barang Transfer -->
-        <li class="nav-item {{ Nav::isRoute('barang-transfer.masuk') }}">
-            <a class="nav-link" href="{{ route('barang-transfer.masuk') }}">
-                <i class="fa-solid fa-left-from-bracket"></i>
-                <span>{{ __('Barang Transfer Masuk') }}</span>
-            </a>
-        </li>
-        <li class="nav-item {{ Nav::isRoute('barang-transfer.keluar') }}">
-            <a class="nav-link" href="{{ route('barang-transfer.keluar') }}">
+        <li class="nav-item {{ Nav::isRoute('barang-transfer.index') }}">
+            <a class="nav-link" href="{{ route('barang-transfer.index') }}">
                 <i class="fa-solid fa-right-from-bracket"></i>
-                <span>{{ __('Barang Transfer Keluar') }}</span>
+                <span>{{ __('Transfer Barang') }}</span>
             </a>
         </li>
 
@@ -323,7 +317,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Alejandro RH {{ now()->year }}</span>
+                    <span>Copyright &copy; 4 orang kelompok sister bro @ {{ now()->year }}</span>
                 </div>
             </div>
         </footer>

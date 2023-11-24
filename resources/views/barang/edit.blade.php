@@ -36,7 +36,7 @@
                     <label for="stok">Stok</label>
                     <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok"
                         id="stok" placeholder="Stok" autocomplete="off"
-                        value="{{ old('stok') ?? $barang->stock }}">
+                        value="{{ old('stok') ?? $barang->stock }}" disabled>
                     @error('stok')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror

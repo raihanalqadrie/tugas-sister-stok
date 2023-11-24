@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\NotEqual;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EditBarangTransferRequest extends FormRequest
 {
@@ -26,11 +27,11 @@ class EditBarangTransferRequest extends FormRequest
     {
         return [
             // 'barang_id' => 'exists:barangs,id',
-            'nama' => 'required|max:255',
             'deskripsi' => 'nullable',
-            'jumlah' => ['required', 'numeric', new NotEqual(0)],
+            'tipe' => ['required', Rule::in(['masuk', 'keluar'])],
+            'jumlah' => 'required|numeric',
             'harga_satuan' => 'required|numeric|gte:1',
-            'penerima' => 'required|gte:1',
+            'penerima' => 'required',
         ];
     }
 }
