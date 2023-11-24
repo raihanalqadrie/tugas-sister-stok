@@ -19,9 +19,7 @@ use App\Http\Controllers\RegisterController;
 */
 
 Route::get('/', function () {
-    return view('login.index', [
-        "title" => "Home"
-    ]);
+    return view('home');
 });
 
 Auth::routes();
