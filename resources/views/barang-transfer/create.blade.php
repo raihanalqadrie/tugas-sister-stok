@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('barang.transfer.store') }}" method="post">
+            <form action="{{ route('barang-transfer.store') }}" method="post">
                 @csrf
 
                 <div class="form-group">
@@ -61,7 +61,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="{{ route('barang.transfer.masuk') }}" class="btn btn-default">Back to list</a>
+                <a href="{{ route('barang-transfer.masuk') }}" class="btn btn-default">Back to list</a>
 
             </form>
         </div>

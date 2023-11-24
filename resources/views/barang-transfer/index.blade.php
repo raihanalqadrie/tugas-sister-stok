@@ -6,7 +6,7 @@
 
     <!-- Main Content goes here -->
 
-    <a href="{{ route('barang.transfer.create') }}" class="btn btn-primary mb-3">Create Transfer Barang</a>
+    <a href="{{ route('barang-transfer.create') }}" class="btn btn-primary mb-3">Create Transfer Barang</a>
 
     @if (session('message'))
         <div class="alert alert-success">
@@ -39,8 +39,8 @@
                     <td>{{ $transfer->created_at }}</td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{ route('barang.transfer.edit', $transfer->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a>
-                            <form action="{{ route('barang.transfer.destroy', $transfer->id) }}" method="post">
+                            <a href="{{ route('barang-transfer.edit', $transfer->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a>
+                            <form action="{{ route('barang-transfer.destroy', $transfer->id) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this?')">Delete</button>

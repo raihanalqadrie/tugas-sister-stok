@@ -70,14 +70,14 @@
             </a>
         </li>
         <!-- Nav Item - Barang Transfer -->
-        <li class="nav-item {{ Nav::isRoute('barang.transfer.masuk') }}">
-            <a class="nav-link" href="{{ route('barang.transfer.masuk') }}">
+        <li class="nav-item {{ Nav::isRoute('barang-transfer.masuk') }}">
+            <a class="nav-link" href="{{ route('barang-transfer.masuk') }}">
                 <i class="fa-solid fa-left-from-bracket"></i>
                 <span>{{ __('Barang Transfer Masuk') }}</span>
             </a>
         </li>
-        <li class="nav-item {{ Nav::isRoute('barang.transfer.keluar') }}">
-            <a class="nav-link" href="{{ route('barang.transfer.keluar') }}">
+        <li class="nav-item {{ Nav::isRoute('barang-transfer.keluar') }}">
+            <a class="nav-link" href="{{ route('barang-transfer.keluar') }}">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <span>{{ __('Barang Transfer Keluar') }}</span>
             </a>

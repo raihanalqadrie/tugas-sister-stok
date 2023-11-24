@@ -8,7 +8,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('barang.transfer.update', $barangTransfer->id) }}" method="post">
+            <form action="{{ route('barang-transfer.update', $barangTransfer->id) }}" method="post">
                 @csrf
                 @method('put')
 
@@ -75,7 +75,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="{{ $barangTransfer->jumlah > 0 ? route('barang.transfer.masuk') : route('barang.transfer.keluar') }}" class="btn btn-default">Back to list</a>
+                <a href="{{ $barangTransfer->jumlah > 0 ? route('barang-transfer.masuk') : route('barang-transfer.keluar') }}" class="btn btn-default">Back to list</a>
 
             </form>
         </div>

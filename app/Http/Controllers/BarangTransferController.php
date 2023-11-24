@@ -19,7 +19,7 @@ class BarangTransferController extends Controller
     {
         $barangsMasuk = BarangTransfer::where('jumlah', ">", 0)->paginate(10);
         // return tanggal, nm brg, jmlh, ketrangan, id
-        return view('barang.transfer.index', [
+        return view('barang-transfer.index', [
             'title' => 'List Barang Masuk',
             "barangTransfers" => $barangsMasuk,
         ]);
@@ -28,7 +28,7 @@ class BarangTransferController extends Controller
     public function barangsKeluar()
     {
         $barangsKeluar = BarangTransfer::where('jumlah', "<", 0)->paginate(10);
-        return view('barang.transfer.index', [
+        return view('barang-transfer.index', [
             'title' => 'List Barang Keluar',
             "barangTransfers" => $barangsKeluar,
         ]);
@@ -47,7 +47,7 @@ class BarangTransferController extends Controller
      */
     public function create()
     {
-        return view('barang.transfer.create', [
+        return view('barang-transfer.create', [
             'title' => 'Create Transfer',
             'barangs' => Barang::all(),
         ]);
@@ -58,6 +58,7 @@ class BarangTransferController extends Controller
      */
     public function store(AddBarangTransferRequest $request)
     {
+        ddd($request);
         BarangTransfer::create([
             'barang_id' => $request->barang_id,
             'nama' => $request->nama,
@@ -66,7 +67,7 @@ class BarangTransferController extends Controller
             'harga_satuan' => $request->harga_satuan,
             'penerima' => $request->penerima,
         ]);
-        return redirect('/barang/transfer/{id}')->with('success', true);
+        return redirect('/barang-transfer/{id}')->with('success', true);
     }
 
     /**
@@ -74,7 +75,7 @@ class BarangTransferController extends Controller
      */
     public function show(BarangTransfer $barangTransfer)
     {
-        return view('barang.transfer.edit', [
+        return view('barang-transfer.edit', [
             'title' => 'Edit Transfer',
             "barangTransfer" => $barangTransfer,
         ]);
@@ -85,7 +86,7 @@ class BarangTransferController extends Controller
      */
     public function edit(BarangTransfer $barangTransfer)
     {
-        return view('barang.transfer.edit', [
+        return view('barang-transfer.edit', [
             'title' => 'Edit Transfer',
             "barangTransfer" => $barangTransfer,
             'barangs' => Barang::all(),
@@ -103,7 +104,7 @@ class BarangTransferController extends Controller
         $barangTransfer->harga_satuan = $request->harga_satuan;
         $barangTransfer->penerima = $request->penerima;
         $barangTransfer->save();
-        return redirect('/barang/transfer/{id}')->with('success', true);
+        return redirect('/barang-transfer/{id}')->with('success', true);
     }
 
     /**
@@ -113,9 +114,9 @@ class BarangTransferController extends Controller
     {
         $barangTransfer->delete();
         if ($barangTransfer->jumlah > 0) {
-            return redirect()->route('barang.transfer.masuk')->with('message', 'Barang Transfer deleted successfully!');
+            return redirect()->route('barang-transfer.masuk')->with('message', 'Barang Transfer deleted successfully!');
         } else {
-            return redirect()->route('barang.transfer.keluar')->with('message', 'Barang Transfer deleted successfully!');
+            return redirect()->route('barang-transfer.keluar')->with('message', 'Barang Transfer deleted successfully!');
         }
     }
 }
