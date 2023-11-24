@@ -75,7 +75,7 @@ class BarangTransferController extends Controller
     public function show(BarangTransfer $barangTransfer)
     {
         return view('barang.transfer.edit', [
-            'title' => 'Liat Transfer',
+            'title' => 'Edit Transfer',
             "barangTransfer" => $barangTransfer,
         ]);
     }
@@ -86,7 +86,7 @@ class BarangTransferController extends Controller
     public function edit(BarangTransfer $barangTransfer)
     {
         return view('barang.transfer.edit', [
-            'title' => 'Liat Transfer',
+            'title' => 'Edit Transfer',
             "barangTransfer" => $barangTransfer,
             'barangs' => Barang::all(),
         ]);

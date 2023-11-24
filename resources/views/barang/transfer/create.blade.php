@@ -13,7 +13,7 @@
 
                 <div class="form-group">
                     <label for="barang_id">Nama Barang</label>
-                    <select name="barang_id" id="barang_id" class="form-control @error('barang_id') is-invalid @enderror" name="barang_id">
+                    <select name="barang_id" id="barang_id" class="form-control @error('barang_id') is-invalid @enderror">
                         @foreach ($barangs as $barang)
                             <option value="{{ $barang->id }}">(id = {{ $barang->id }}) - {{ $barang->nama }}</option>
                         @endforeach

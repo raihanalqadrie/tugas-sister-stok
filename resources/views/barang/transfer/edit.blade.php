@@ -8,15 +8,15 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('barang.update', $barang->id) }}" method="post">
+            <form action="{{ route('barang.transfer.update', $barangTransfer->id) }}" method="post">
                 @csrf
                 @method('put')
 
                 <div class="form-group">
                     <label for="barang_id">Nama Barang</label>
-                    <select name="barang_id" id="barang_id" class="form-control @error('barang_id') is-invalid @enderror" name="barang_id" disabled>
+                    <select name="barang_id" id="barang_id" class="form-control @error('barang_id') is-invalid @enderror" disabled>
                         @foreach ($barangs as $barang)
-                            <option value="{{ $barang->id }}">(id = {{ $barang->id }}) - {{ $barang->nama }}</option>
+                            <option value="{{ $barang->id }}" {{ $barangTransfer->barang_id == $barang->barang_id ? 'selected' : '' }}>(id = {{ $barang->id }}) - {{ $barang->nama }}</option>
                         @endforeach
                     </select>
                     @error('barang_id')

@@ -25,11 +25,11 @@ class AddBarangTransferRequest extends FormRequest
     public function rules()
     {
         return [
-            'barang_id' > 'exists:barangs,id',
+            'barang_id' => 'required|exists:barangs,id',
             'nama' => 'required|max:255',
             'deskripsi' => 'nullable',
-            'jumlah' => ['required', new NotEqual(0)],
-            'harga_satuan' => 'required|gte:1',
+            'jumlah' => ['required', 'numeric', new NotEqual(0)],
+            'harga_satuan' => 'required|numeric|gte:1',
             'penerima' => 'required|gte:1',
         ];
     }

@@ -64,7 +64,7 @@ class BarangController extends Controller
     public function show(Barang $barang)
     {
         return view('barang.edit', [
-            'title' => 'Detail Barang',
+            'title' => 'Edit Barang',
             "barang" => $barang,
         ]);
     }
