@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Notifications\Notifiable;
 
 class BarangTransfer extends Model
@@ -20,13 +21,8 @@ class BarangTransfer extends Model
     ];
 
 
-    /**
-     * Get the stock.
-     *
-     * @return int
-     */
-    public function getStockAttribute()
+    public function barang(): BelongsTo
     {
-
+        return $this->belongsTo(BarangTransfer::class, 'id', 'barang_id');
     }
 }

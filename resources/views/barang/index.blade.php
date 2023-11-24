@@ -18,8 +18,9 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Full Name</th>
-                <th>Email</th>
+                <th>Nama</th>
+                <th>Deskripsi</th>
+                <th>Stok</th>
                 <th>#</th>
             </tr>
         </thead>
@@ -27,8 +28,9 @@
             @foreach ($barangs as $barang)
                 <tr>
                     <td scope="row">{{ $loop->iteration }}</td>
-                    <td>{{ $barang->full_name }}</td>
-                    <td>{{ $barang->email }}</td>
+                    <td>{{ $barang->nama }}</td>
+                    <td>{{ $barang->deskripsi }}</td>
+                    <td>{{ $barang->stock }}</td>
                     <td>
                         <div class="d-flex">
                             <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a>

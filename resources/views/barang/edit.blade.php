@@ -13,35 +13,47 @@
                 @method('put')
 
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="First name" autocomplete="off" value="{{ old('name') ?? $barang->name }}">
-                  @error('name')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="nama">Nama barang</label>
+                    <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                        id="nama" placeholder="Nama barang" autocomplete="off"
+                        value="{{ old('nama') ?? $barang->nama }}">
+                    @error('nama')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="last_name">Last Name</label>
-                  <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" id="last_name" placeholder="Last name" autocomplete="off" value="{{ old('last_name') ?? $barang->last_name }}">
-                  @error('last_name')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="deskripsi">Deskripsi</label>
+                    <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
+                        id="deskripsi" placeholder="Deskripsi" autocomplete="off"
+                        value="{{ old('deskripsi') ?? $barang->deskripsi }}">
+                    @error('deskripsi')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" autocomplete="off" value="{{ old('email') ?? $barang->email }}">
-                  @error('email')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="stok">Stok</label>
+                    <input type="text" class="form-control @error('stok') is-invalid @enderror" name="stok"
+                        id="stok" placeholder="Stok" autocomplete="off"
+                        value="{{ old('stok') ?? $barang->stock }}">
+                    @error('stok')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password" autocomplete="off">
-                  @error('password')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="created_at">Waktu Dibuat</label>
+                    <input type="text" class="form-control @error('created_at') is-invalid @enderror" name="created_at"
+                        id="created_at" placeholder="Waktu Dibuat" autocomplete="off"
+                        value="{{ old('created_at') ?? $barang->created_at }}" disabled>
+                </div>
+
+                <div class="form-group">
+                    <label for="updated_at">Waktu Terakhir Diperbarui</label>
+                    <input type="text" class="form-control @error('updated_at') is-invalid @enderror" name="updated_at"
+                        id="updated_at" placeholder="Waktu Terakhir Diperbarui" autocomplete="off"
+                        value="{{ old('updated_at') ?? $barang->updated_at }}" disabled>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>

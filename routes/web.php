@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BarangTransferController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -33,7 +34,8 @@ Route::get('/about', function () {
 
 Route::middleware('auth')->group(function() {
     Route::resource('user', UserController::class);
-    Route::get('/barang/masuk', [BarangController::class, 'listBarangMasuk'])->name('barang.listBarangMasuk');
-    Route::get('/barang/keluar', [BarangController::class, 'listBarangKeluar'])->name('barang.listBarangKeluar');
-    Route::resource('barang', BarangController::class);
+    Route::get('/barang/transfer/masuk', [BarangTransferController::class, 'listBarangMasuk'])->name('barang.transfer.masuk');
+    Route::get('/barang/transfer/keluar', [BarangTransferController::class, 'listBarangKeluar'])->name('barang.transfer.keluar');
+    Route::resource('barang/transfer', BarangTransferController::class)->names('barang.transfer');
+    Route::resource('barang', BarangController::class)->names('barang');
 });
