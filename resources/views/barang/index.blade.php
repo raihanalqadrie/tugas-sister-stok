@@ -6,7 +6,7 @@
 
     <!-- Main Content goes here -->
 
-    <a href="{{ route('barang.create') }}" class="btn btn-primary mb-3">New Barang</a>
+    <a href="{{ route('barang.create') }}" class="btn btn-primary mb-3">Create Barang</a>
 
     @if (session('message'))
         <div class="alert alert-success">

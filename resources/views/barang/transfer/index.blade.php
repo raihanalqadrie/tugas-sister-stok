@@ -6,7 +6,7 @@
 
     <!-- Main Content goes here -->
 
-    <a href="{{ route('barang.create') }}" class="btn btn-primary mb-3">New Barang</a>
+    <a href="{{ route('barang.transfer.create') }}" class="btn btn-primary mb-3">Create Transfer Barang</a>
 
     @if (session('message'))
         <div class="alert alert-success">
@@ -18,23 +18,29 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama</th>
+                <th>Nama Barang</th>
                 <th>Deskripsi</th>
-                <th>Stok</th>
+                <th>Jumlah</th>
+                <th>Harga Satuan</th>
+                <th>Total Harga</th>
+                <th>Tanggal Dibuat</th>
                 <th>#</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($barangs as $barang)
+            @foreach ($barangTransfers as $transfer)
                 <tr>
                     <td scope="row">{{ $loop->iteration }}</td>
-                    <td>{{ $barang->nama }}</td>
-                    <td>{{ $barang->deskripsi }}</td>
-                    <td>{{ $barang->stock }}</td>
+                    <td>{{ $transfer->barang->nama }}</td>
+                    <td>{{ $transfer->deskripsi }}</td>
+                    <td>{{ $transfer->jumlah }}</td>
+                    <td>{{ $transfer->harga_satuan }}</td>
+                    <td>{{ $transfer->jumlah * $transfer->harga_satuan }}</td>
+                    <td>{{ $transfer->created_at }}</td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a>
-                            <form action="{{ route('barang.destroy', $barang->id) }}" method="post">
+                            <a href="{{ route('barang.transfer.edit', $transfer->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a>
+                            <form action="{{ route('barang.transfer.destroy', $transfer->id) }}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this?')">Delete</button>
@@ -46,7 +52,7 @@
         </tbody>
     </table>
 
-    {{ $barangs->links() }}
+    {{ $barangTransfers->links() }}
 
     <!-- End of Main Content -->
 @endsection

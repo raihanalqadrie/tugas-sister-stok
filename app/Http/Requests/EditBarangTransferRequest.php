@@ -27,8 +27,10 @@ class EditBarangTransferRequest extends FormRequest
         return [
             // 'barang_id' > 'exists:barangs,id',
             'nama' => 'required|max:255',
-            'jumlah' => [new NotEqual(0)],
-            'deskripsi' => 'nullable'
+            'deskripsi' => 'nullable',
+            'jumlah' => ['required', new NotEqual(0)],
+            'harga_satuan' => 'required|gte:1',
+            'penerima' => 'required|gte:1',
         ];
     }
 }

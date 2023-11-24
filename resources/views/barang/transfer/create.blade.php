@@ -8,27 +8,60 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('barang.store') }}" method="post">
+            <form action="{{ route('barang.transfer.store') }}" method="post">
                 @csrf
 
                 <div class="form-group">
-                  <label for="nama">Nama barang</label>
-                  <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" id="nama" placeholder="Nama barang" autocomplete="off" value="{{ old('nama') }}">
-                  @error('nama')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="barang_id">Nama Barang</label>
+                    <select name="barang_id" id="barang_id" class="form-control @error('barang_id') is-invalid @enderror" name="barang_id">
+                        @foreach ($barangs as $barang)
+                            <option value="{{ $barang->id }}">(id = {{ $barang->id }}) - {{ $barang->nama }}</option>
+                        @endforeach
+                    </select>
+                    @error('barang_id')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="deskripsi">Deskripsi</label>
-                  <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" placeholder="Deskripsi" autocomplete="off" value="{{ old('deskripsi') }}">
-                  @error('deskripsi')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="deskripsi">Deskripsi</label>
+                    <input type="text" class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi"
+                        id="deskripsi" placeholder="Deskripsi" autocomplete="off" value="{{ old('deskripsi') }}">
+                    @error('deskripsi')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="jumlah">Jumlah</label>
+                    <input type="number" class="form-control @error('jumlah') is-invalid @enderror" name="jumlah"
+                        id="jumlah" placeholder="Jumlah" autocomplete="off" value="{{ old('jumlah') }}">
+                    @error('jumlah')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="harga_satuan">Harga Satuan</label>
+                    <input type="number" class="form-control @error('harga_satuan') is-invalid @enderror"
+                        name="harga_satuan" id="harga_satuan" placeholder="Harga Satuan" autocomplete="off"
+                        value="{{ old('harga_satuan') }}">
+                    @error('harga_satuan')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="penerima">Penerima</label>
+                    <input type="text" class="form-control @error('penerima') is-invalid @enderror" name="penerima"
+                        id="penerima" placeholder="Penerima" autocomplete="off" value="{{ old('penerima') }}">
+                    @error('penerima')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a href="{{ route('barang.index') }}" class="btn btn-default">Back to list</a>
+                <a href="{{ route('barang.transfer.masuk') }}" class="btn btn-default">Back to list</a>
 
             </form>
         </div>

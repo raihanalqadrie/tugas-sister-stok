@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AddBarangTransferRequest;
 use App\Http\Requests\EditBarangTransferRequest;
+use App\Models\Barang;
 use App\Models\BarangTransfer;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class BarangTransferController extends Controller
 {
@@ -20,18 +19,18 @@ class BarangTransferController extends Controller
     {
         $barangsMasuk = BarangTransfer::where('jumlah', ">", 0)->paginate(10);
         // return tanggal, nm brg, jmlh, ketrangan, id
-        return view('barang.transfer', [
+        return view('barang.transfer.index', [
             'title' => 'List Barang Masuk',
-            "barangs" => $barangsMasuk,
+            "barangTransfers" => $barangsMasuk,
         ]);
     }
 
     public function barangsKeluar()
     {
         $barangsKeluar = BarangTransfer::where('jumlah', "<", 0)->paginate(10);
-        return view('barang.transfer', [
+        return view('barang.transfer.index', [
             'title' => 'List Barang Keluar',
-            "barangs" => $barangsKeluar,
+            "barangTransfers" => $barangsKeluar,
         ]);
     }
 
@@ -50,7 +49,7 @@ class BarangTransferController extends Controller
     {
         return view('barang.transfer.create', [
             'title' => 'Create Transfer',
-            'barangTransfers' => BarangTransfer::paginate(10),
+            'barangs' => Barang::all(),
         ]);
     }
 
@@ -63,6 +62,9 @@ class BarangTransferController extends Controller
             'barang_id' => $request->barang_id,
             'nama' => $request->nama,
             'deskripsi' => $request->deskripsi,
+            'jumlah' => $request->jumlah,
+            'harga_satuan' => $request->harga_satuan,
+            'penerima' => $request->penerima,
         ]);
         return redirect('/barang/transfer/{id}')->with('success', true);
     }
@@ -86,6 +88,7 @@ class BarangTransferController extends Controller
         return view('barang.transfer.edit', [
             'title' => 'Liat Transfer',
             "barangTransfer" => $barangTransfer,
+            'barangs' => Barang::all(),
         ]);
     }
 
@@ -96,6 +99,9 @@ class BarangTransferController extends Controller
     {
         $barangTransfer->nama = $request->nama;
         $barangTransfer->deskripsi = $request->deskripsi;
+        $barangTransfer->jumlah = $request->jumlah;
+        $barangTransfer->harga_satuan = $request->harga_satuan;
+        $barangTransfer->penerima = $request->penerima;
         $barangTransfer->save();
         return redirect('/barang/transfer/{id}')->with('success', true);
     }
