@@ -57,6 +57,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
+                <a href="{{ route('barang.transfer.create') }}" class="btn btn-default">Tambah/Kurang Stok</a>
                 <a href="{{ route('barang.index') }}" class="btn btn-default">Back to list</a>
 
             </form>

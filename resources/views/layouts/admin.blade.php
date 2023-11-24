@@ -69,6 +69,20 @@
                 <span>{{ __('Barang') }}</span>
             </a>
         </li>
+        <!-- Nav Item - Barang Transfer -->
+        <li class="nav-item {{ Nav::isRoute('barang.transfer.masuk') }}">
+            <a class="nav-link" href="{{ route('barang.transfer.masuk') }}">
+                <i class="fas fa-box"></i>
+                <span>{{ __('Barang Transfer Masuk') }}</span>
+            </a>
+        </li>
+        <li class="nav-item {{ Nav::isRoute('barang.transfer.keluar') }}">
+            <a class="nav-link" href="{{ route('barang.transfer.keluar') }}">
+                <i class="fas fa-box"></i>
+                <span>{{ __('Barang Transfer Keluar') }}</span>
+            </a>
+        </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider">
