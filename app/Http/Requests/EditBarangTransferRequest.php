@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\NotEqual;
 use Illuminate\Foundation\Http\FormRequest;
 
 class EditBarangTransferRequest extends FormRequest
@@ -24,8 +25,9 @@ class EditBarangTransferRequest extends FormRequest
     public function rules()
     {
         return [
-            'barang_id' > 'exists:barangs,id',
+            // 'barang_id' > 'exists:barangs,id',
             'nama' => 'required|max:255',
+            'jumlah' => [new NotEqual(0)],
             'deskripsi' => 'nullable'
         ];
     }

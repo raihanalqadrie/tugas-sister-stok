@@ -16,7 +16,8 @@ class BarangTransferController extends Controller
     }
 
 
-    public function barangsMasuk() {
+    public function barangsMasuk()
+    {
         $barangsMasuk = BarangTransfer::where('jumlah', ">", 0)->paginate(10);
         // return tanggal, nm brg, jmlh, ketrangan, id
         return view('barang.transfer', [
@@ -24,8 +25,9 @@ class BarangTransferController extends Controller
             "barangs" => $barangsMasuk,
         ]);
     }
-    
-    public function barangsKeluar() {
+
+    public function barangsKeluar()
+    {
         $barangsKeluar = BarangTransfer::where('jumlah', "<", 0)->paginate(10);
         return view('barang.transfer', [
             'title' => 'List Barang Keluar',
@@ -38,12 +40,7 @@ class BarangTransferController extends Controller
      */
     public function index()
     {
-        // Eager load the 'transfers' relationship to avoid N+1 queries
-        $barangTransfers = BarangTransfer::paginate(10);
-        return view('barang.transfer', [
-            'title' => 'List Barang Masuk',
-            'barangTransfers' => $barangTransfers,
-        ]);
+        return $this->barangsMasuk();
     }
 
     /**
@@ -51,8 +48,8 @@ class BarangTransferController extends Controller
      */
     public function create()
     {
-        return view('barangTransfer.create', [
-            'title' => 'New BarangTransfer',
+        return view('barang.transfer.create', [
+            'title' => 'Create Transfer',
             'barangTransfers' => BarangTransfer::paginate(10),
         ]);
     }
@@ -62,12 +59,12 @@ class BarangTransferController extends Controller
      */
     public function store(AddBarangTransferRequest $request)
     {
-        $dataBarangTransfer = $request->validate([
-            "nama" => 'required',
-            "deskripsi" => "nullable",    
+        BarangTransfer::create([
+            'barang_id' => $request->barang_id,
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
         ]);
-        BarangTransfer::create($dataBarangTransfer);
-        return redirect('/barangTransfer/{id}')->with('success', true);
+        return redirect('/barang/transfer/{id}')->with('success', true);
     }
 
     /**
@@ -75,7 +72,8 @@ class BarangTransferController extends Controller
      */
     public function show(BarangTransfer $barangTransfer)
     {
-        return view('barangTransfer.edit', [
+        return view('barang.transfer.edit', [
+            'title' => 'Liat Transfer',
             "barangTransfer" => $barangTransfer,
         ]);
     }
@@ -85,7 +83,8 @@ class BarangTransferController extends Controller
      */
     public function edit(BarangTransfer $barangTransfer)
     {
-        return view('barangTransfer.edit', [
+        return view('barang.transfer.edit', [
+            'title' => 'Liat Transfer',
             "barangTransfer" => $barangTransfer,
         ]);
     }
@@ -95,16 +94,10 @@ class BarangTransferController extends Controller
      */
     public function update(EditBarangTransferRequest $request, BarangTransfer $barangTransfer)
     {
-        $requestBarangTransfer = $request->validate([
-            "nama" => 'required|string',
-            "deskripsi" => "required|string",    
-        ]);
-        $barangTransfer->nama = $requestBarangTransfer['nama'];
-        $barangTransfer->deskripsi = $requestBarangTransfer['deskripsi'];
+        $barangTransfer->nama = $request->nama;
+        $barangTransfer->deskripsi = $request->deskripsi;
         $barangTransfer->save();
-        return redirect('/barangTransfer/{id}', [
-            "barangTransfer" => $barangTransfer,
-        ]);
+        return redirect('/barang/transfer/{id}')->with('success', true);
     }
 
     /**
@@ -113,26 +106,10 @@ class BarangTransferController extends Controller
     public function destroy(BarangTransfer $barangTransfer)
     {
         $barangTransfer->delete();
-        return redirect()->route('barangTransfer.index')->with('message', 'BarangTransfer deleted successfully!');
-    }
-
-    public function barangTransfersMasuk() {
-        $barangTransfersMasuk = DB::table('barangTransfer_transfer')
-            ->where('jumlah', ">", 0)
-            ->get();
-        // return tanggal, nm brg, jmlh, ketrangan, id
-        return view('barangTransfer.masuk', [
-            "barangTransfers" => $barangTransfersMasuk,
-        ]);
-    }
-    
-    public function barangTransfersKeluar() {
-        $barangTransfersKeluar = DB::table('barangTransfer_transfer')
-            ->where('jumlah', "<", 0)
-            ->get();
-        // return tanggal, nm brg, jmlh, ketrangan, id
-        return view('barangTransfer.masuk', [
-            "barangTransfers" => $barangTransfersKeluar,
-        ]);
+        if ($barangTransfer->jumlah > 0) {
+            return redirect()->route('barang.transfer.masuk')->with('message', 'Barang Transfer deleted successfully!');
+        } else {
+            return redirect()->route('barang.transfer.keluar')->with('message', 'Barang Transfer deleted successfully!');
+        }
     }
 }
