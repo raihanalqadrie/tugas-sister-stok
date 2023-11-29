@@ -1,12 +1,10 @@
 @extends('layouts.admin')
 
 @section('main-content')
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ $title ?? __('Blank Page') }}</h1>
 
     <!-- Main Content goes here -->
 
-    <a href="{{ route('barang.create') }}" class="btn btn-primary mb-3">Create Barang</a>
+    <a href="{{ route('barang.create') }}" class="btn btn-primary mb-3">Tambah Barang</a>
 
     @if (session('message'))
         <div class="alert alert-success">
@@ -14,65 +12,48 @@
         </div>
     @endif
 
-    <table class="table table-bordered table-stripped">
-        <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Deskripsi</th>
-                <th>Stok</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($barangs as $barang)
-                <tr>
-                    <td scope="row">{{ $loop->iteration }}</td>
-                    <td>{{ $barang->nama }}</td>
-                    <td>{{ $barang->deskripsi }}</td>
-                    <td>{{ $barang->stock }}</td>
-                    <td>
-                        <div class="d-flex">
-                            <a href="{{ route('barang.edit', $barang->id) }}" class="btn btn-sm btn-primary mr-2">Edit</a>
-                            <form action="{{ route('barang.destroy', $barang->id) }}" method="post">
-                                @csrf
-                                @method('delete')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure to delete this?')">Delete</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
 
-    {{ $barangs->links() }}
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Deskripsi</th>
+                            <th>Stok</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($barangs as $barang)
+                            <tr>
+                                <td scope="row">{{ $loop->iteration }}</td>
+                                <td>{{ $barang->nama }}</td>
+                                <td>{{ $barang->deskripsi }}</td>
+                                <td>{{ $barang->stock }}</td>
+                                <td>
+                                    <div class="d-flex">
+                                        <a href="{{ route('barang.edit', $barang->id) }}"
+                                            class="btn btn-sm btn-primary mr-2">Edit</a>
+                                        <form action="{{ route('barang.destroy', $barang->id) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Are you sure to delete this?')">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{-- {{ $barangs->links() }} --}}
 
     <!-- End of Main Content -->
 @endsection
-
-@push('notif')
-    @if (session('success'))
-        <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    @if (session('warning'))
-        <div class="alert alert-warning border-left-warning alert-dismissible fade show" role="alert">
-            {{ session('warning') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-    @if (session('status'))
-        <div class="alert alert-success border-left-success" role="alert">
-            {{ session('status') }}
-        </div>
-    @endif
-@endpush

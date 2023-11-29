@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AddBarangRequest;
 use App\Http\Requests\EditBarangRequest;
 use App\Models\Barang;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class BarangController extends Controller
 {
@@ -19,7 +21,7 @@ class BarangController extends Controller
     public function index()
     {
         // Eager load the 'transfers' relationship to avoid N+1 queries
-        $barangs = Barang::with('transfers')->orderBy('id', 'DESC')->paginate(10);
+        $barangs = Barang::with('transfers')->orderBy('id', 'DESC')->get();
 
         // // Append stock property to every object inside the barang list
         // foreach ($barangs as $barang) {
@@ -50,11 +52,16 @@ class BarangController extends Controller
      */
     public function store(AddBarangRequest $request)
     {
-        $barang = Barang::create([
-            'nama' => $request->nama,
-            'deskripsi' => $request->deskripsi,
-        ]);
-        return redirect()->route('barang.edit', [$barang->id])->with('success', 'Barang berhasil di create');
+        try {
+            $barang = Barang::create([
+                'nama' => $request->nama,
+                'deskripsi' => $request->deskripsi,
+            ]);
+            return redirect()->route('barang.index', [$barang->id])->with('sukses', 'Barang berhasil di tambahkan');
+        } catch (Exception $e) {
+            Log::error('Error adding barang: ' . $e->getMessage());
+            return redirect()->route('barang.index')->with('gagal', 'Barang gagal di tambahkan');
+        }
     }
 
     /**
@@ -87,7 +94,7 @@ class BarangController extends Controller
         $barang->nama = $request->nama;
         $barang->deskripsi = $request->deskripsi;
         $barang->save();
-        return redirect()->route('barang.edit', [$barang->id])->with('success', 'Barang berhasil di update');
+        return redirect()->route('barang.index', [$barang->id])->with('sukses', 'Barang berhasil di update');
     }
 
     /**
@@ -96,6 +103,6 @@ class BarangController extends Controller
     public function destroy(Barang $barang)
     {
         $barang->delete();
-        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus');
+        return redirect()->route('barang.index')->with('sukses', 'Barang berhasil dihapus');
     }
 }
