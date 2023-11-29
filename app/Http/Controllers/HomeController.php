@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\BarangTransfer;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,13 +26,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = User::count();
+        $totalUser = User::count();
 
-        $widget = [
-            'users' => $users,
-            //...
-        ];
+        $totalBarang = Barang::count();
 
-        return view('home', compact('widget'));
+        $transfers = BarangTransfer::all();
+
+        $totalPemasukan = 0;
+        $totalPengeluaran = 0;
+
+        foreach ($transfers as $transfer) {
+            if ($transfer->tipe === 'masuk') {
+                $totalPengeluaran += $transfer->jumlah * $transfer->harga_satuan;
+            } else {
+                $totalPemasukan += $transfer->jumlah * $transfer->harga_satuan;
+            }
+        }
+
+        return view('home', [
+            'totalUser' => $totalUser,
+            'totalBarang' => $totalBarang,
+            'totalPemasukan' => $totalPemasukan,
+            'totalPengeluaran' => $totalPengeluaran,
+        ]);
     }
 }

@@ -17,7 +17,7 @@ class BarangTransferController extends Controller
 
     public function barangsMasuk()
     {
-        $barangsMasuk = BarangTransfer::with('barang')->where('tipe', "masuk")->paginate(10);
+        $barangsMasuk = BarangTransfer::with('barang')->where('tipe', "masuk")->orderBy('id', 'DESC')->paginate(10);
         return view('barang-transfer.index', [
             'title' => 'List Barang Masuk',
             "barangTransfers" => $barangsMasuk,
@@ -26,7 +26,7 @@ class BarangTransferController extends Controller
 
     public function barangsKeluar()
     {
-        $barangsKeluar = BarangTransfer::with('barang')->where('tipe', "keluar")->paginate(10);
+        $barangsKeluar = BarangTransfer::with('barang')->where('tipe', "keluar")->orderBy('id', 'DESC')->paginate(10);
         return view('barang-transfer.index', [
             'title' => 'List Barang Keluar',
             "barangTransfers" => $barangsKeluar,
@@ -38,7 +38,7 @@ class BarangTransferController extends Controller
      */
     public function index()
     {
-        $barangTransfers = BarangTransfer::with('barang')->paginate(10);
+        $barangTransfers = BarangTransfer::with('barang')->orderBy('id', 'DESC')->paginate(10);
         return view('barang-transfer.index', [
             'title' => 'List Barang Masuk/Keluar',
             "barangTransfers" => $barangTransfers,

@@ -21,9 +21,7 @@
                 <th>Nama</th>
                 <th>Deskripsi</th>
                 <th>Stok</th>
-                <th>Harga Satuan</th>
-                <th>Total Harga</th>
-                <th>#</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>

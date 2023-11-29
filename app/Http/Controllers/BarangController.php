@@ -19,7 +19,7 @@ class BarangController extends Controller
     public function index()
     {
         // Eager load the 'transfers' relationship to avoid N+1 queries
-        $barangs = Barang::with('transfers')->paginate(10);
+        $barangs = Barang::with('transfers')->orderBy('id', 'DESC')->paginate(10);
 
         // // Append stock property to every object inside the barang list
         // foreach ($barangs as $barang) {

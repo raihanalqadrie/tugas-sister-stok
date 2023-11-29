@@ -22,11 +22,12 @@
                 <th>No</th>
                 <th>Nama Barang</th>
                 <th>Deskripsi</th>
+                <th>Tipe</th>
                 <th>Jumlah</th>
                 <th>Harga Satuan</th>
                 <th>Total Harga</th>
                 <th>Tanggal Dibuat</th>
-                <th>#</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +36,12 @@
                     <td scope="row">{{ $loop->iteration }}</td>
                     <td>{{ $transfer->barang ? $transfer->barang->nama : 'ERROR' }}</td>
                     <td>{{ $transfer->deskripsi }}</td>
+                    <td>
+                        <div class="btn btn-sm @if($transfer->tipe==='keluar') btn-danger @else btn-success @endif mr-2">
+                            {{ $transfer->tipe }}
+                        </div>
+                    </td>
+                    
                     <td>{{ $transfer->jumlah }}</td>
                     <td>{{ Number::currency($transfer->harga_satuan, in: 'IDR', locale: 'id') }}</td>
                     <td>{{ Number::currency($transfer->jumlah * $transfer->harga_satuan, in: 'IDR', locale: 'id') }}</td>
