@@ -44,6 +44,7 @@ class HomeController extends Controller
         }
 
         return view('home', [
+            'title' => 'Dashboard',
             'totalUser' => $totalUser,
             'totalBarang' => $totalBarang,
             'totalPemasukan' => $totalPemasukan,

@@ -2,7 +2,6 @@
 
 @section('main-content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Profile Kelompok') }}</h1>
 
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
@@ -29,14 +28,16 @@
 
             <div class="card shadow mb-4">
                 <div class="card-profile-image mt-4">
-                    <figure class="rounded-circle avatar avatar font-weight-bold" style="font-size: 60px; height: 180px; width: 180px;" data-initial="{{ Auth::user()->name[0] }}"></figure>
+                    <figure class="rounded-circle avatar avatar font-weight-bold"
+                        style="font-size: 60px; height: 180px; width: 180px;" data-initial="{{ Auth::user()->name[0] }}">
+                    </figure>
                 </div>
                 <div class="card-body">
 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-center">
-                                <h5 class="font-weight-bold">{{  Auth::user()->fullName }}</h5>
+                                <h5 class="font-weight-bold">{{ Auth::user()->fullName }}</h5>
                                 <p>Tugas Sister</p>
                             </div>
                         </div>
@@ -63,4 +64,5 @@
                 </div>
             </div>
         </div>
+    </div>
 @endsection
