@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'last_name' => 'Admin',
                 'email' => 'admin@example.com',
-                'password' => Hash::make('12345678'),
+                'password' => '12345678',
+                'is_admin' => true,
             ]);
         }
         foreach (Product::$value as $key => $value) {

@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,7 @@ class UserController extends Controller
     {
         return view('user.index', [
             'title' => 'User CRUD',
-            'users' => User::paginate(10)
+            'users' => User::all()
         ]);
     }
 
@@ -32,7 +37,7 @@ class UserController extends Controller
     {
         return view('user.create', [
             'title' => 'New User',
-            'users' => User::paginate(10)
+            'users' => User::all()
         ]);
     }
 

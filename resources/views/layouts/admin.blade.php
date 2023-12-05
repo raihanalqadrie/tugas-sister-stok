@@ -72,6 +72,15 @@
                 </a>
             </li>
 
+            <!-- Nav Item - User -->
+            @if (Auth::user()->is_admin)
+                <li class="nav-item {{ Nav::isRoute('user.index') }}">
+                    <a class="nav-link" href="{{ route('user.index') }}">
+                        <i class="fas fa-user"></i>
+                        <span>{{ __('User') }}</span>
+                    </a>
+                </li>
+            @endif
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -203,8 +212,7 @@
                     @endif
 
                     @if (session('gagal'))
-                        <div class="alert alert-danger border-left-danger alert-dismissible fade show"
-                            role="alert">
+                        <div class="alert alert-danger border-left-danger alert-dismissible fade show" role="alert">
                             {{ session('gagal') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
