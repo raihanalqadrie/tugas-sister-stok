@@ -2,34 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
 use App\Models\BarangTransfer;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 
 class BarangReportController extends Controller
 {
+    private function get_storage_path(string $path) {
+        mkdir($path, 0664, true);
+        return storage_path($path);
+    }
+
     public function download_report_stok_barang() {
         // Fetch data for the report (you might want to pass data from your database)
-        $barangs = \App\Models\Barang::all();
+        $barangs = Barang::all();
 
         // Generate PDF using the view
-        $pdf = Pdf::loadView('pdf.report', compact('barangs', 'transfers'));
-
-        // Save or output the PDF
-        // Example: Save the PDF to storage
-        $pdf->save(storage_path('app/public/reports/report.pdf'));
+        $pdf = PDF::setPaper('a4', 'portrait')->loadView('reports.report-stok-barang', compact('barangs'));
 
         // Or you can return the PDF as a download
-        // return $pdf->download('report.pdf');
+        return $pdf->download('laporan-stok-barang.pdf');
     }
 
     public function download_report_barang_masuk() {
-        $barangsMasuk = BarangTransfer::with('barang')->where('tipe', "masuk")->orderBy('id', 'DESC')->get();
+        $barangTransfers = BarangTransfer::with('barang')->where('tipe', "masuk")->orderBy('id', 'DESC')->get();
+
+        // Generate PDF using the view
+        $pdf = PDF::setPaper('a4', 'portrait')->loadView('reports.report-barang-masuk', compact('barangTransfers'));
+
+        // Or you can return the PDF as a download
+        return $pdf->download('laporan-barang-masuk.pdf');
     }
 
     public function download_report_barang_keluar() {
-        $barangsKeluar = BarangTransfer::with('barang')->where('tipe', "keluar")->orderBy('id', 'DESC')->get();
+        $barangTransfers = BarangTransfer::with('barang')->where('tipe', "keluar")->orderBy('id', 'DESC')->get();
 
+        // Generate PDF using the view
+        $pdf = PDF::setPaper('a4', 'portrait')->loadView('reports.report-barang-keluar', compact('barangTransfers'));
+
+        // Or you can return the PDF as a download
+        return $pdf->download('laporan-barang-keluar.pdf');
     }
     
 }
