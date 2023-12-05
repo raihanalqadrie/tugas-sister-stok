@@ -45,7 +45,12 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ __('Main Navigation') }}
+            </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ Nav::isRoute('home') }}">
@@ -55,7 +60,12 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ __('Feature') }}
+            </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ Nav::isRoute('barang.index') }}">
