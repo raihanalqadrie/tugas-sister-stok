@@ -9,11 +9,6 @@ use Illuminate\Http\Request;
 
 class BarangReportController extends Controller
 {
-    private function get_storage_path(string $path) {
-        mkdir($path, 0664, true);
-        return storage_path($path);
-    }
-
     public function download_report_stok_barang() {
         // Fetch data for the report (you might want to pass data from your database)
         $barangs = Barang::all();
