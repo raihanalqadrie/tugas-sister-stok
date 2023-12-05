@@ -45,7 +45,12 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ __('Main Navigation') }}
+            </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ Nav::isRoute('home') }}">
@@ -55,7 +60,12 @@
             </li>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                {{ __('Feature') }}
+            </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item {{ Nav::isRoute('barang.index') }}">
@@ -203,8 +213,7 @@
                     @endif
 
                     @if (session('gagal'))
-                        <div class="alert alert-danger border-left-danger alert-dismissible fade show"
-                            role="alert">
+                        <div class="alert alert-danger border-left-danger alert-dismissible fade show" role="alert">
                             {{ session('gagal') }}
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>

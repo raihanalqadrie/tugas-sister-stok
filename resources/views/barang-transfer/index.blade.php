@@ -6,6 +6,8 @@
     <a href="{{ route('barang-transfer.create') }}" class="btn btn-primary mb-3">Tambah Transfer Barang</a>
     <a href="{{ route('barang-transfer.index.masuk') }}" class="btn btn-success mb-3">List Barang Masuk</a>
     <a href="{{ route('barang-transfer.index.keluar') }}" class="btn btn-danger mb-3">List Barang Keluar</a>
+    <a href="" class="btn btn-info mb-3">Cetak Laporan Barang Masuk</a>
+    <a href="" class="btn btn-info mb-3">Cetak Laporan Barang Keluar</a>
 
     <div class="card shadow mb-4">
         <div class="card-body">
