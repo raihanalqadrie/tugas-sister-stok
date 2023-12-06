@@ -61,6 +61,12 @@ class BarangTransferController extends Controller
      */
     public function store(AddBarangTransferRequest $request)
     {
+        $barang = Barang::find($request->barang_id);
+        if ($request->tipe == 'keluar' && ($barang->stock - $request->jumlah <= 0)) {
+            return redirect()
+                ->route('barang-transfer.index')
+                ->with('gagal', 'Stok barang ' . $barang->nama . ' tidak mencukupi. Gagal untuk transfer keluar barang.');
+        }
         $barangTransfer = BarangTransfer::create([
             'barang_id' => $request->barang_id,
             'deskripsi' => $request->deskripsi,
@@ -71,7 +77,7 @@ class BarangTransferController extends Controller
         ]);
         return redirect()
             ->route('barang-transfer.index', [$barangTransfer->id])
-            ->with('sukses', 'Data barang '.$barangTransfer->tipe.' berhasil ditambahkan');
+            ->with('sukses', 'Data barang ' . $barangTransfer->tipe . ' berhasil ditambahkan');
     }
 
     /**
@@ -103,6 +109,12 @@ class BarangTransferController extends Controller
      */
     public function update(EditBarangTransferRequest $request, BarangTransfer $barangTransfer)
     {
+        $barang = Barang::find($request->barang_id);
+        if ($request->tipe == 'keluar' && ($barang->stock - $request->jumlah <= 0)) {
+            return redirect()
+                ->route('barang-transfer.index')
+                ->with('gagal', 'Stok barang ' . $barang->nama . ' tidak mencukupi. Gagal untuk update detail transfer barang keluar.');
+        }
         $barangTransfer->deskripsi = $request->deskripsi;
         $barangTransfer->tipe = $request->tipe;
         $barangTransfer->jumlah = $request->jumlah;
@@ -111,7 +123,7 @@ class BarangTransferController extends Controller
         $barangTransfer->save();
         return redirect()
             ->route('barang-transfer.index', [$barangTransfer->id])
-            ->with('sukses', 'Data barang '.$barangTransfer->tipe.' berhasil di update');
+            ->with('sukses', 'Data barang ' . $barangTransfer->tipe . ' berhasil di update');
     }
 
     /**
@@ -119,7 +131,13 @@ class BarangTransferController extends Controller
      */
     public function destroy(BarangTransfer $barangTransfer)
     {
+        $barang = Barang::find($barangTransfer->barang_id);
+        if ($barangTransfer->tipe == 'masuk' && ($barang->stock - $barangTransfer->jumlah <= 0)) {
+            return redirect()
+                ->route('barang-transfer.index')
+                ->with('gagal', 'Stok barang ' . $barang->nama . 'tidak mencukupi. Gagal untuk delete detail transfer barang masuk.');
+        }
         $barangTransfer->delete();
-        return redirect()->route('barang-transfer.index')->with('sukses', 'Data barang '.$barangTransfer->tipe.' berhasil di delete');
+        return redirect()->route('barang-transfer.index')->with('sukses', 'Data barang ' . $barangTransfer->tipe . ' berhasil di delete');
     }
 }

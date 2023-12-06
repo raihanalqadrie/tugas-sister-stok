@@ -86,8 +86,8 @@
             @if (Auth::user()->is_admin)
                 <li class="nav-item {{ Nav::isRoute('user.index') }}">
                     <a class="nav-link" href="{{ route('user.index') }}">
-                        <i class="fas fa-user"></i>
-                        <span>{{ __('User') }}</span>
+                        <i class="fas fa-users"></i>
+                        <span>{{ __('Kelola User') }}</span>
                     </a>
                 </li>
             @endif

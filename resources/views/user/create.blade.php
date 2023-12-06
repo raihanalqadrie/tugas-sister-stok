@@ -1,9 +1,6 @@
 @extends('layouts.admin')
 
 @section('main-content')
-    <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ $title ?? __('Blank Page') }}</h1>
-
     <!-- Main Content goes here -->
 
     <div class="card">
@@ -12,35 +9,50 @@
                 @csrf
 
                 <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" placeholder="First name" autocomplete="off" value="{{ old('name') }}">
-                  @error('name')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name"
+                        placeholder="First name" autocomplete="off" value="{{ old('name') }}">
+                    @error('name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="last_name">Last Name</label>
-                  <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" id="last_name" placeholder="Last name" autocomplete="off" value="{{ old('last_name') }}">
-                  @error('last_name')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="last_name">Last Name</label>
+                    <input type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name"
+                        id="last_name" placeholder="Last name" autocomplete="off" value="{{ old('last_name') }}">
+                    @error('last_name')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="email">Email</label>
-                  <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" placeholder="Email" autocomplete="off" value="{{ old('email') }}">
-                  @error('email')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                        id="email" placeholder="Email" autocomplete="off" value="{{ old('email') }}">
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="password" placeholder="Password" autocomplete="off">
-                  @error('password')
-                    <span class="text-danger">{{ $message }}</span>
-                  @enderror
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control @error('password') is-invalid @enderror" name="password"
+                        id="password" placeholder="Password" autocomplete="off">
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="is_admin">Administrator?</label>
+                    <select name="is_admin" id="is_admin" class="form-control @error('is_admin') is-invalid @enderror">
+                        <option value="1">YES</option>
+                        <option value="0">NO</option>
+                    </select>
+                    @error('is_admin')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>

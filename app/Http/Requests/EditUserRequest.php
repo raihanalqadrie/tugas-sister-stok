@@ -27,7 +27,8 @@ class EditUserRequest extends FormRequest
             'name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email',
-            'password' => 'nullable|min:8'
+            'password' => 'nullable|min:8',
+            'is_admin' => 'required',
         ];
     }
 }

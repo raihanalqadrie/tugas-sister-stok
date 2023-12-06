@@ -24,8 +24,8 @@
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
                     <select name="tipe" id="tipe" class="form-control @error('tipe') is-invalid @enderror">
-                        <option value="masuk">masuk</option>
-                        <option value="keluar">keluar</option>
+                        <option value="masuk">MASUK</option>
+                        <option value="keluar">KELUAR</option>
                     </select>
                     @error('tipe')
                         <span class="text-danger">{{ $message }}</span>

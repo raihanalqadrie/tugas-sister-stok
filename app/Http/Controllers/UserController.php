@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         return view('user.index', [
-            'title' => 'User CRUD',
+            'title' => 'List User',
             'users' => User::all()
         ]);
     }
@@ -36,7 +36,7 @@ class UserController extends Controller
     public function create()
     {
         return view('user.create', [
-            'title' => 'New User',
+            'title' => 'Tambah User',
             'users' => User::all()
         ]);
     }
@@ -53,7 +53,8 @@ class UserController extends Controller
             'name' => $request->name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'password' => Hash::make($request->password)
+            'password' => Hash::make($request->password),
+            'is_admin' => $request->is_admin,
         ]);
 
         return redirect()
@@ -101,6 +102,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->last_name = $request->last_name;
         $user->email = $request->email;
+        $user->is_admin = $request->is_admin;
         $user->save();
 
         return redirect()
