@@ -24,6 +24,8 @@
                             <th>Nama</th>
                             <th>Deskripsi</th>
                             <th>Stok</th>
+                            <th>Total Pemasukan</th>
+                            <th>Total Pengeluaran</th>
                             <th>Action</th>
                         </tr>
                     </thead>

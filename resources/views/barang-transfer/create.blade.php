@@ -58,6 +58,7 @@
                     @error('harga_satuan')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
+                    <div id="barang_harga_sebelumnya"></div>
                 </div>
 
                 <div class="form-group">
@@ -75,6 +76,36 @@
             </form>
         </div>
     </div>
+@endsection
 
+{{-- TODO: belum work coy --}}
+@section('scripts')
     <!-- End of Main Content -->
+    <script>
+        $(document).ready(function() {
+            // Attach change event listener to the select element
+            $("#barang_id").change(function() {
+                // Get the selected value
+                var selectedValue = $(this).val();
+
+                // Make an AJAX request
+                $.ajax({
+                    url: '/barangs/' + selectedValue + '/json',
+                    type: 'GET',
+                    dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                    success: function(data) {
+                        // Handle the response data
+                        // For example, you can update a div with the result
+                        $("#barang_harga_sebelumnya").html(JSON.stringify(data));
+                    },
+                    error: function(error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

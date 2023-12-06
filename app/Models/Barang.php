@@ -36,6 +36,30 @@ class Barang extends Model
         return collect($jumlahTotal)->sum();
     }
 
+    public function getTotalPemasukanAttribute()
+    {
+        $barang = $this->find($this->id);
+        $jumlahTotal = $barang
+            ->transfers()
+            ->where('tipe', 'keluar')
+            ->get()
+            ->map(fn ($transfer) => $transfer->jumlah * $transfer->harga_satuan)
+            ->toArray();
+        return collect($jumlahTotal)->sum();
+    }
+
+    public function getTotalPengeluaranAttribute()
+    {
+        $barang = $this->find($this->id);
+        $jumlahTotal = $barang
+            ->transfers()
+            ->where('tipe', 'masuk')
+            ->get()
+            ->map(fn ($transfer) => $transfer->jumlah * $transfer->harga_satuan)
+            ->toArray();
+        return collect($jumlahTotal)->sum();
+    }
+
     public function transfers(): HasMany
     {
         return $this->hasMany(BarangTransfer::class, 'barang_id', 'id');
