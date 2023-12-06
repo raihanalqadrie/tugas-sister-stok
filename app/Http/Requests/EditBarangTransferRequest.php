@@ -26,7 +26,6 @@ class EditBarangTransferRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'barang_id' => 'exists:barangs,id',
             'deskripsi' => 'nullable',
             'tipe' => ['required', Rule::in(['masuk', 'keluar'])],
             'jumlah' => 'required|numeric',

@@ -13,7 +13,7 @@
                     <label for="barang_id">Nama Barang</label>
                     <select name="barang_id" id="barang_id" class="form-control @error('barang_id') is-invalid @enderror" disabled>
                         @foreach ($barangs as $barang)
-                            <option value="{{ $barang->id }}" {{ $barangTransfer->barang_id == $barang->barang_id ? 'selected' : '' }}>(id = {{ $barang->id }}) - {{ $barang->nama }}</option>
+                            <option value="{{ $barang->id }}" {{ $barangTransfer->barang_id == $barang->barang_id ? 'selected' : '' }}>{{ $barang->nama }} - id = {{ $barang->id }} - stok = {{ $barang->stock }}</option>
                         @endforeach
                     </select>
                     @error('barang_id')
@@ -24,8 +24,8 @@
                 <div class="form-group">
                     <label for="tipe">Tipe</label>
                     <select name="tipe" id="tipe" class="form-control @error('tipe') is-invalid @enderror">
-                        <option value="masuk">MASUK</option>
-                        <option value="keluar">KELUAR</option>
+                        <option value="masuk" {{ $barangTransfer->tipe == 'masuk' ? 'selected' : '' }}>MASUK</option>
+                        <option value="keluar" {{ $barangTransfer->tipe == 'keluar' ? 'selected' : '' }}>KELUAR</option>
                     </select>
                     @error('tipe')
                         <span class="text-danger">{{ $message }}</span>

@@ -75,6 +75,11 @@ class BarangController extends Controller
         ]);
     }
 
+    public function showJson(Barang $barang)
+    {
+        return response()->json($barang);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */

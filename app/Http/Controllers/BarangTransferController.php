@@ -109,7 +109,7 @@ class BarangTransferController extends Controller
      */
     public function update(EditBarangTransferRequest $request, BarangTransfer $barangTransfer)
     {
-        $barang = Barang::find($request->barang_id);
+        $barang = Barang::find($barangTransfer->barang_id);
         if ($request->tipe == 'keluar' && ($barang->stock - $request->jumlah <= 0)) {
             return redirect()
                 ->route('barang-transfer.index')
@@ -135,7 +135,7 @@ class BarangTransferController extends Controller
         if ($barangTransfer->tipe == 'masuk' && ($barang->stock - $barangTransfer->jumlah <= 0)) {
             return redirect()
                 ->route('barang-transfer.index')
-                ->with('gagal', 'Stok barang ' . $barang->nama . 'tidak mencukupi. Gagal untuk delete detail transfer barang masuk.');
+                ->with('gagal', 'Stok barang ' . $barang->nama . ' tidak mencukupi. Gagal untuk delete detail transfer barang masuk.');
         }
         $barangTransfer->delete();
         return redirect()->route('barang-transfer.index')->with('sukses', 'Data barang ' . $barangTransfer->tipe . ' berhasil di delete');

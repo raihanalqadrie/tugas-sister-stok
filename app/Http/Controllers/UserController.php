@@ -53,7 +53,7 @@ class UserController extends Controller
             'name' => $request->name,
             'last_name' => $request->last_name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => $request->password,
             'is_admin' => $request->is_admin,
         ]);
 
@@ -97,7 +97,8 @@ class UserController extends Controller
     public function update(EditUserRequest $request, User $user)
     {
         if($request->filled('password')) {
-            $user->password = Hash::make($request->password);
+            // $user->password = Hash::make($request->password);
+            $user->password = $request->password;
         }
         $user->name = $request->name;
         $user->last_name = $request->last_name;

@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('user', UserController::class);
 
     Route::resource('barang', BarangController::class)->names('barang');
+    Route::get('/barang/{barang}/json', [BarangController::class, 'showJson'])->name('barang.show.json');
     Route::get('/reports/stok-barang', [BarangReportController::class, 'download_report_stok_barang'])->name('reports.stok-barang');
 
     Route::get('/barang-transfer/masuk', [BarangTransferController::class, 'barangsMasuk'])->name('barang-transfer.index.masuk');
