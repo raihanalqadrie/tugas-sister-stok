@@ -11,7 +11,7 @@ class BarangReportController extends Controller
 {
     public function download_report_stok_barang() {
         // Fetch data for the report (you might want to pass data from your database)
-        $barangs = Barang::all();
+        $barangs = Barang::with('transfers')->orderBy('id', 'DESC')->get();
 
         // Generate PDF using the view
         $pdf = PDF::setPaper('a4', 'portrait')->loadView('reports.report-stok-barang', compact('barangs'));

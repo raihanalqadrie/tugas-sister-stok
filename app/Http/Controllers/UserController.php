@@ -56,7 +56,9 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        return redirect()->route('user.index')->with('message', 'User added successfully!');
+        return redirect()
+            ->route('user.index')
+            ->with('sukses', 'User berhasil ditambahkan');
     }
 
     /**
@@ -101,7 +103,9 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->save();
 
-        return redirect()->route('user.index')->with('message', 'User updated successfully!');
+        return redirect()
+            ->route('user.index')
+            ->with('message', 'User berhasil di update');
     }
 
     /**
@@ -118,6 +122,8 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('user.index')->with('message', 'User deleted successfully!');
+        return redirect()
+            ->route('user.index')
+            ->with('message', 'User berhasil dihapus');
     }
 }

@@ -57,10 +57,10 @@ class BarangController extends Controller
                 'nama' => $request->nama,
                 'deskripsi' => $request->deskripsi,
             ]);
-            return redirect()->route('barang.index', [$barang->id])->with('sukses', 'Barang berhasil di tambahkan');
+            return redirect()->route('barang.index', [$barang->id])->with('sukses', 'Barang berhasil ditambahkan');
         } catch (Exception $e) {
             Log::error('Error adding barang: ' . $e->getMessage());
-            return redirect()->route('barang.index')->with('gagal', 'Barang gagal di tambahkan');
+            return redirect()->route('barang.index')->with('gagal', 'Barang gagal ditambahkan');
         }
     }
 

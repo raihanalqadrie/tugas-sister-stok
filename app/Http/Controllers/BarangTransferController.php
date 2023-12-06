@@ -71,7 +71,7 @@ class BarangTransferController extends Controller
         ]);
         return redirect()
             ->route('barang-transfer.index', [$barangTransfer->id])
-            ->with('sukses', 'Data barang '.$barangTransfer->tipe.' berhasil di create');
+            ->with('sukses', 'Data barang '.$barangTransfer->tipe.' berhasil ditambahkan');
     }
 
     /**
