@@ -105,7 +105,7 @@ class UserController extends Controller
 
         return redirect()
             ->route('user.index')
-            ->with('message', 'User berhasil di update');
+            ->with('sukses', 'User berhasil di update');
     }
 
     /**
@@ -117,13 +117,13 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         if (Auth::id() == $user->getKey()) {
-            return redirect()->route('user.index')->with('warning', 'Can not delete yourself!');
+            return redirect()->route('user.index')->with('gagal', 'Can not delete yourself!');
         }
 
         $user->delete();
 
         return redirect()
             ->route('user.index')
-            ->with('message', 'User berhasil dihapus');
+            ->with('sukses', 'User berhasil dihapus');
     }
 }
